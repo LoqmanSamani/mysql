@@ -551,4 +551,106 @@ WHERE job LIKE "_ea%"; -- combine "_" and "%".
 
 
 
+-- Sort
+
+SELECT * FROM coworker
+ORDER BY last_name;  -- Sorts the items in the table by last_name in alphabetical order 
+
+
+SELECT * FROM coworker
+ORDER BY last_name; -- The same as previous command, because ASC is default.
+
+
+SELECT * FROM coworker
+ORDER BY first_name DESC;  -- Sorts the items in the table in descending order based on last_name
+
+
+SELECT * FROM coworker
+ORDER BY first_name DESC, last_name ASC; -- Using two columns to sort the data
+
+
+
+
+
+
+-- LIMIT clause
+
+SELECT * FROM coworker
+LIMIT 3;  -- Limit the number of rows, in this case only the first three rows will be shown.
+
+
+SELECT * FROM coworker
+ORDER BY first_name LIMIT 2;
+
+
+SELECT * FROM coworker
+ORDER BY first_name LIMIT 2, 1; -- The first number (2) is an offset.
+
+
+
+
+
+
+-- UNION operator
+
+
+-- This operation combines both table vertically.
+SELECT * FROM transactions
+UNION
+SELECT * FROM products;
+
+
+-- This operation combines specific rows from both table vertically.
+SELECT transaction_id, amount FROM transactions
+UNION
+SELECT product_id, price FROM products;
+
+
+
+
+
+
+-- SELF JOIN
+
+CREATE TABLE customers(
+   
+     customer_id INT PRIMARY KEY AUTO_INCREMENT,
+     first_name VARCHAR(25),
+     last_name VARCHAR(25),
+     referral_id INT
+);
+
+INSERT INTO customers (fist_name, last_name, referral_id)
+VALUES("Loqman", "Samani", NULL),
+      ("Ali", "Safai", 1),
+      ("Fatah", "Mariwani", 2),
+      ("Hadi", "Dastan", 2);
+
+
+
+SELECT cu1.customer_id, cu1.first_name, cu1.last_name,
+       CONCAT(cu2.first_name, " ", cu2.last_name) AS "referred_by"
+
+FROM customers AS cu1
+
+INNER JOIN customers AS cu2
+
+ON cu1.referral_id = cu2.customer_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
