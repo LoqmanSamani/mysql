@@ -591,6 +591,8 @@ ORDER BY first_name LIMIT 2, 1; -- The first number (2) is an offset.
 
 
 
+
+
 -- UNION operator
 
 
@@ -604,6 +606,8 @@ SELECT * FROM products;
 SELECT transaction_id, amount FROM transactions
 UNION
 SELECT product_id, price FROM products;
+
+
 
 
 
@@ -646,11 +650,280 @@ ON cu1.referral_id = cu2.customer_id;
 
 
 
+-- VIEW : Avertual table based on the result-set of an SQL statement.
+
+
+-- Create a new view with the name "coworker_attendance" from coworker-table
+
+CREATE VIEW coworker_attendance AS 
+SELECT first_name, last_name
+FROM coworker;
+
+
+SELECT * FROM coworker_attendance; -- Visualize the coworker_attendance table.
+
+DROP VIEW coworker_attendance;  -- Delete the view table.
 
 
 
 
 
+
+
+
+
+
+-- INDEX (BTree data structure)
+
+
+USE test_db; -- Use the test database.
+
+
+CREATE INDEX last_name_idx
+ON customers(last_name); -- Create an index for last_name column
+
+
+SHOW INDEXES FROM customers; -- Show the added index
+
+SELECT * FROM customers
+WHERE last_name = "Samani"; -- So this tome the search process is faster, if we use last_name for searching.
+
+
+
+CREATE INDEX full_name
+ON customers(last_name, first_name);  -- Create a multiple index.
+
+
+SHOW INDEXES FROM customers;
+
+
+SELECT * FROM customers
+WHERE last_name = "Samani" AND first_name = "Shaida";  -- Searching for a specific customer based on multiple index (full_name)
+
+
+
+ALTER TABLE customers
+DROP last_name_ind;  -- Delete an index
+
+
+
+
+
+
+
+
+
+-- Subquery : A query within another query.
+
+
+SELECT first_name, last_name, hourly_pay, 
+       (SELECT AVG(hourly_pay) FROM coworker) AS avg_pay -- Average pay (the code is written as a subquery)
+FROM coworker;
+
+
+-- Another example
+
+SELECT * FROM coworker
+WHERE hourly_pay >= (SELECT AVG(hourly_pay) FROM coworker);
+
+
+-- Another example
+
+SELECT first_name, last_name FROM customers
+WHERE customer_id IN 
+	  (SELECT DISTINCT customer_id
+	   FROM transactions
+       WHERE customer_id IS NOT NULL);
+
+
+
+
+
+
+
+
+
+-- GROUP BY : Aggregate all rows by a specific column.
+
+
+-- example 1
+
+SELECT SUM(amount), date_time 
+FROM transactions
+GROUP BY date_time;
+
+
+-- example 2
+
+SELECT MAX(amount), date_time
+FROM transactions
+GROUP BY date_time;
+
+
+-- example 3
+
+SELECT COUNT(amount), date_time
+FROM transactions
+GROUP BY date_time
+HAVING COUNT(amount) > 1 AND customer_id IS NOT NULL;
+
+
+
+
+
+
+
+
+-- ROLLUP 
+
+
+-- an example
+
+SELECT SUM(amount), date_time
+FROM transactions
+GROUP BY date_time WITH ROLLUP;
+
+
+-- another example
+
+SELECT COUNT(transaction_id) AS "num_orders", customer_id
+FROM transactions
+GROUP BY customer_id WITH ROLLUP;
+
+
+
+
+
+
+
+-- ON DELETE
+
+
+-- ON DELETE SET NULL : when a foreign-key is deleted, replace it with NULL.
+
+-- ON DELETE CASCADE : when a foreign-key is deleted, delete the row.
+
+SELT foreign_key_checks = 1; -- by default. (if a column in a table serves as a foriegn-key in another table, you can not delete any row from the table.)
+
+SET foreign_key_checks = 0;
+
+DELETE * FROM customers
+WHERE customer_id = 4;  -- customer_id is a foreign-key in another table and by default it can not be deleted but after we set "SET foreign_key_checks = 0;" it can be deleted.
+
+
+
+
+
+
+
+
+
+-- Stored Peocedure : is prepared SQL code, that you can save great if there is a query that you write often.
+
+
+
+DELIMITER $$  -- Change temporarily the delimiter
+
+CREATE PROCEDURE test_db.get_customers() -- Specify your database name.
+BEGIN -- Start point of the statement.
+    SELECT * FROM customers; -- Just an example of a statement, which one should write often.
+END $$ -- End point of the statement.
+
+DELIMITER ;  -- Change the delimiter to the default one.
+
+
+
+CALL get_customers();  -- Execute the created function.
+
+DROP PROCEDURE get_customers(); -- Delete the fucntion.
+
+
+
+-- Another example
+
+DELIMITER $$
+
+CREATE PROCEDURE find_customer(IN f_name VARCHAR(50),
+                               IN l_name VARCHAR(50))
+
+BEGIN
+
+SELECT * 
+FROM customers
+WHERE first_name = f_name AND last_name = l_name;
+
+END $$
+
+DELIMITER ;
+
+
+CALL find_customer("Loqman", "Samani");
+
+
+
+
+
+
+
+-- Trigger
+
+
+-- customers table from test_db.
+
+/* 
+
+coworker_id   first_name   last_name     job            hourly_pay     salary              hire_date
+
+1               Loqman      Samani    bioinformatician    100.00       10000.00       "2023-11-09 15:24:15"
+2               Jaqub       Badpar    IT-specialist       60.00        8000.00        "2023-11-09 15:24:15"
+3               Diman       Hissaini  teacher             40.00        7000.00        "2023-11-09 15:24:15"
+4               Shaida      Yosefi    biologist           70.00        5600.00        "2023-11-09 15:24:15"
+5               Somaye      Mariwani  lawyer              80.00        4500.00        "2023-11-09 15:24:15"
+6               Saman       Azarhosh  teacher             12.50        5000.00        "2023-11-13 13:28:57"
+7               Salman      Badpar    engineer            40.00        11000.00       "2023-11-13 13:28:57"
+8               Belal       Minoee    farmer              20.00        4300.80        "2023-11-13 13:28:57"
+
+*/
+
+
+-- Create a trigger for salary (per month)
+
+CREATE TRIGGER before_hourly_pay
+BEFORE UPDATE ON coworkers
+FOR EACH ROW
+SET NEW.salary = (NEW.hourly_pay * 22); -- there are 22 work-days in a month
+
+
+
+SHOW TRIGGERS; -- Show all triggers in a dataset.
+
+
+-- Use the trigger
+
+UPDATE coworkers
+SET hourly_pay = 120
+WHERE coworker_id = 4;
+
+
+
+-- another example of usage
+
+UPDATE coworkers
+SET hourly_pay = hourly_pay + 1;  -- It increases the hourly_pay of all coworkers by $1.
+
+
+
+
+
+
+
+
+
+
+/*
+Loghman Samani
+Nov 13, 2023
+*/
 
 
 
