@@ -1,6 +1,3 @@
-Certainly! Here's an improved version of your README file:
-
----
 
 # SQL MINI-PROJECTS
 
