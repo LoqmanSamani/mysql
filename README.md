@@ -20,7 +20,7 @@ Welcome to the **SQL Mini-Projects** repository! This collection is designed to 
 
 3. **[Inventory Management System](https://github.com/LoqmanSamani/SQL_MiniProjects/tree/systembiology/project_3):**
 
-   Develop a database for efficient inventory tracking in a store. Tables encompass products, categories, suppliers, and sales. Implement inventory management features and generate insightful reports.
+    Design and implement a comprehensive database system for efficient inventory tracking in a store. The database includes tables for `product`, `category`, `supplier`, `customer`, and `sale`. Develop features for inventory management, such as product additions, stock updates, and sales transactions. Implement relationships between entities to ensure accurate tracking of product details and supplier information.
 
 4. **[Banking System](https://github.com/LoqmanSamani/SQL_MiniProjects/tree/systembiology/project_4):**
 
