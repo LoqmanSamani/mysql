@@ -13,6 +13,7 @@ ALTER DATABASE database_name  READ ONLY = 1;  -- the mood of database is read on
 ALTER DATABASE database_name READ ONLY = 0;    -- you can modify it.
 
 
+SET SQL_SAFE_UPDATES = 0; -- Disable Safe Update Mode
 
 
 -- create a table in the data base
