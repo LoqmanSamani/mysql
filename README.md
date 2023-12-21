@@ -27,9 +27,9 @@ Welcome to the **SQL Mini-Projects** repository! This collection is designed to 
     Develop a comprehensive database (`BankingSystem`) for managing banking operations, encompassing tables for `customers`, `accounts`, `transactions`, and `balances`. Implement features that facilitate depositing, withdrawing, and account management functionalities, ensuring a robust and secure system for efficient banking operations.
 
 
-5. **[Movie Database](https://github.com/LoqmanSamani/SQL_MiniProjects/tree/systembiology/project_5):**
+5. **[Movie Bank Database](https://github.com/LoqmanSamani/SQL_MiniProjects/tree/systembiology/project_5):**
 
-   Design a database to catalog movies, including details about actors, directors, and genres. Implement search and filtering functionality for movie enthusiasts.
+    Design a database (`MovieBank`) to catalog movies, including details about actors, directors and genres. The database contains the tables `movies`, `directors`, `actors`, `genres`, `rates` and `movie_actors`. 
 
 6. **[Social Media Database](https://github.com/LoqmanSamani/SQL_MiniProjects/tree/systembiology/project_6):**
 
