@@ -33,7 +33,7 @@ Welcome to the **SQL Mini-Projects** repository! This collection is designed to 
 
 6. **[Social Media Database](https://github.com/LoqmanSamani/SQL_MiniProjects/tree/systembiology/project_6):**
 
-   Create a simple social media database with tables for users, posts, comments, and likes. Implement user registration, post creation, and comment functionality.
+   Create a simple (`SocialMediaDatabase`) with tables for `users`, `posts`, `comments`, `groups_`, `likes`, `admins`, `accounts`, `friendship`, `messages`, `group_members` and `notifications`. Each table stores important information in different columns, which can be linked to each other via foreign keys in each table.
 
 7. **[E-commerce Database](https://github.com/LoqmanSamani/SQL_MiniProjects/tree/systembiology/project_7):**
 
