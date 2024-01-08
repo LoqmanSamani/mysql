@@ -37,7 +37,7 @@ Welcome to the **SQL Mini-Projects** repository! This collection is designed to 
 
 7. **[E-commerce Database](https://github.com/LoqmanSamani/SQL_MiniProjects/tree/systembiology/project_7):**
 
-   Develop a database for an e-commerce platform, covering products, customers, orders, and reviews. Build features for product listings, cart management, and order processing.
+   Develop a database (`ECommerce`) for an e-commerce platform, covering `products`, `users`, `orders`, `categories`, `product_category`, `order_items` and `reviews`. Build features for product listings, cart management, and order processing.
 
 8. **[Event Management System](https://github.com/LoqmanSamani/SQL_MiniProjects/tree/systembiology/project_8):**
 

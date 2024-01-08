@@ -68,17 +68,6 @@ VALUES
 
 
 
--- Inserting sample data into the product_category table
-INSERT INTO product_category (PRODUCT_ID, CATEGORY_ID)
-VALUES
-  (11, 1),  -- Laptop belongs to Electronics category
-  (12, 2),  -- Smartphone belongs to Mobile Phones category
-  (13, 3),  -- Headphones belong to Audio category
-  (14, 4),  -- Gaming Console belongs to Gaming category
-  (15, 5);  -- Camera belongs to Cameras category
-
-
-
 
 
 
