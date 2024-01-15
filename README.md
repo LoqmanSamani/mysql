@@ -1,5 +1,10 @@
 
 # SQL MINI-PROJECTS
+![Static Badge](https://img.shields.io/badge/License-MIT-yellow)
+![Static Badge](https://img.shields.io/badge/Project_Duration-2023__2024-orange)
+![Static Badge](https://img.shields.io/badge/Project_Status-Completed-darkgreen)
+![Static Badge](https://img.shields.io/badge/MySQL-8.2.0-blue?logo=mysql&logoColor=white)
+
 
 ![sql.png](https://github.com/LoqmanSamani/SQL_MiniProjects/blob/systembiology/project_1/sql.png)
 
@@ -73,4 +78,4 @@ Welcome to the **SQL Mini-Projects** repository! This collection is designed to 
 
 ---
 
-#### Note: Some projects are currently in progress, and updates will be added accordingly. Feel free to explore, contribute, and enhance your SQL skills!
+#### Feel free to explore, contribute, and enhance your SQL skills!
